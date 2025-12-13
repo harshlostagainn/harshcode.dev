@@ -14,6 +14,7 @@ const IndexPage: React.FC = () => {
   const imgWrapperRef = useRef<HTMLDivElement | null>(null)
   const headingRef = useRef<HTMLHeadingElement | null>(null)
   const aboutRef = useRef<HTMLElement | null>(null)
+  const juggleRef = useRef<HTMLSpanElement | null>(null)
 
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
@@ -46,6 +47,58 @@ const IndexPage: React.FC = () => {
         stagger: 0.3,
       })
     }
+
+    // Juggle animation on hover
+    if (juggleRef.current) {
+      const juggleElement = juggleRef.current
+      const juggleTimeline = gsap.timeline({ paused: true, repeat: -1 })
+
+      juggleTimeline
+        .to(juggleElement, {
+          y: -8,
+          rotation: -5,
+          duration: 0.15,
+          ease: "power1.inOut",
+        })
+        .to(juggleElement, {
+          y: -12,
+          rotation: 0,
+          duration: 0.15,
+          ease: "power1.inOut",
+        })
+        .to(juggleElement, {
+          y: -8,
+          rotation: 5,
+          duration: 0.15,
+          ease: "power1.inOut",
+        })
+        .to(juggleElement, {
+          y: 0,
+          rotation: 0,
+          duration: 0.15,
+          ease: "power1.inOut",
+        })
+
+      const handleMouseEnter = () => juggleTimeline.play()
+      const handleMouseLeave = () => {
+        juggleTimeline.pause()
+        gsap.to(juggleElement, {
+          y: 0,
+          rotation: 0,
+          duration: 0.2,
+          ease: "power1.out",
+        })
+      }
+
+      juggleElement.addEventListener("mouseenter", handleMouseEnter)
+      juggleElement.addEventListener("mouseleave", handleMouseLeave)
+
+      return () => {
+        juggleElement.removeEventListener("mouseenter", handleMouseEnter)
+        juggleElement.removeEventListener("mouseleave", handleMouseLeave)
+        juggleTimeline.kill()
+      }
+    }
   }, [])
 
   return (
@@ -76,8 +129,15 @@ const IndexPage: React.FC = () => {
                 optimizing sales with AI at Regie.ai
               </OutboundLink>
               <span>
-                , while trying to juggle with my inbox zero goals, some tiny
-                side projects and a bit of writing on{" "}
+                , while trying to{" "}
+                <span
+                  ref={juggleRef}
+                  className="inline-block cursor-default"
+                >
+                  juggle
+                </span>{" "}
+                with my inbox zero goals, some tiny side projects and a bit of
+                writing on{" "}
               </span>
               <OutboundLink
                 href="https://nibbles.dev"
