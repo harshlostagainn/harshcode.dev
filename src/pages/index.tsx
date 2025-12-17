@@ -125,6 +125,7 @@ const IndexPage: React.FC = () => {
               <span
                 data-tooltip-id="em-dash-tooltip"
                 data-tooltip-content="not AI generated"
+                aria-label="not AI generated"
                 className="cursor-help"
               >
                 —
