@@ -108,7 +108,7 @@ const IndexPage: React.FC = () => {
       <ReactTooltip
         id="em-dash-tooltip"
         place="top"
-        className="!bg-slate-800 !text-slate-50 dark:!bg-slate-200 dark:!text-slate-900"
+        className="!rounded-lg !bg-slate-800 !text-slate-50 dark:!bg-slate-200 dark:!text-slate-900"
       />
       <main className="flex min-h-[calc(100vh-258px)] flex-col-reverse items-center justify-center gap-12 px-4 md:min-h-[calc(100vh-216px)] md:flex-row">
         <div className="text-center md:w-2/3 md:text-left">
