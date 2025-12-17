@@ -5,6 +5,7 @@ import { Link } from "gatsby"
 import { OutboundLink } from "gatsby-plugin-google-gtag"
 import { StaticImage } from "gatsby-plugin-image"
 import gsap from "gsap"
+import { Tooltip as ReactTooltip } from "react-tooltip"
 import { useMediaQuery } from "usehooks-ts"
 
 import { SEO } from "@components"
@@ -104,6 +105,11 @@ const IndexPage: React.FC = () => {
   return (
     <>
       <SEO title="Home" />
+      <ReactTooltip
+        id="em-dash-tooltip"
+        place="top"
+        className="!rounded-lg !bg-slate-800 !text-slate-50 dark:!bg-slate-200 dark:!text-slate-900"
+      />
       <main className="flex min-h-[calc(100vh-258px)] flex-col-reverse items-center justify-center gap-12 px-4 md:min-h-[calc(100vh-216px)] md:flex-row">
         <div className="text-center md:w-2/3 md:text-left">
           <h1 ref={headingRef} className="mb-8 text-3xl font-bold">
@@ -115,8 +121,16 @@ const IndexPage: React.FC = () => {
           >
             <p className="mb-2">
               Software Engineer by day, automation connoisseur always. Usually
-              found building tools for people who hate doing things
-              manually—because I'm definitely one of them.
+              found building tools for people who hate doing things manually
+              <span
+                data-tooltip-id="em-dash-tooltip"
+                data-tooltip-content="not AI generated"
+                aria-label="not AI generated"
+                className="cursor-help"
+              >
+                —
+              </span>
+              because I'm definitely one of them.
             </p>
             <p className="mb-6">
               <span>Currently </span>
@@ -130,10 +144,7 @@ const IndexPage: React.FC = () => {
               </OutboundLink>
               <span>
                 , while trying to{" "}
-                <span
-                  ref={juggleRef}
-                  className="inline-block cursor-default"
-                >
+                <span ref={juggleRef} className="inline-block cursor-default">
                   juggle
                 </span>{" "}
                 with my inbox zero goals, some tiny side projects and a bit of
