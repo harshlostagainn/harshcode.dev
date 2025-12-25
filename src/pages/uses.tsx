@@ -17,23 +17,22 @@ const sections: Array<{ title: string; items: Item[] }> = [
     title: "💻 Editor & Terminal",
     items: [
       {
-        name: "VS Code Insiders",
-        description: "Primary code editor with the latest features",
-        link: "https://code.visualstudio.com/insiders/",
+        name: "VS Code",
+        description: "Primary code editor for Python, ML, and full-stack work",
+        link: "https://code.visualstudio.com/",
       },
       {
         name: "iTerm2",
-        link: "https://iterm2.com/",
         description: (
           <>
-            Terminal emulator for macOS with tmux integration ➜{" "}
+            Terminal emulator for macOS with tmux & custom theming ➜{" "}
             <OutboundLink
-              href="https://iterm.aashutosh.dev"
+              href="https://github.com/harshlostagainn"
               target="_blank"
               rel="noopener noreferrer"
               className="relative inline font-sans text-blue-600 no-underline transition-colors duration-200 before:absolute before:bottom-0 before:h-px before:w-0 before:bg-current before:transition-all before:content-[''] hover:text-blue-700 hover:no-underline hover:before:w-full focus:outline-none focus-visible:before:w-full dark:text-blue-400 dark:hover:text-blue-300"
             >
-              my config
+              my setup
             </OutboundLink>
           </>
         ),
@@ -41,7 +40,7 @@ const sections: Array<{ title: string; items: Item[] }> = [
       {
         name: "Warp",
         description:
-          "Modern terminal for macOS, slowly moving all my workflows here",
+          "Modern terminal — gradually moving my daily workflows here",
         link: "https://www.warp.dev/",
       },
     ],
@@ -50,12 +49,9 @@ const sections: Array<{ title: string; items: Item[] }> = [
     title: "🖥️ Hardware",
     items: [
       {
-        name: "MacBook Pro M3 Pro",
-        description: "Personal machine - blazingly fast for development",
-      },
-      {
-        name: "MacBook Pro (Space Black)",
-        description: "Work machine - similar specs, sleek finish",
+        name: "MacBook Air (M4-series)",
+        description:
+          "Primary development machine for coding, ML experiments, and content",
       },
     ],
   },
@@ -63,19 +59,12 @@ const sections: Array<{ title: string; items: Item[] }> = [
     title: "📱 Devices",
     items: [
       {
-        name: "Pixel 9 Pro",
-        description: "Primary phone - clean Android experience",
-        link: "https://store.google.com/product/pixel_9_pro",
+        name: "Android Phone",
+        description: "Clean Android experience with focus on productivity",
       },
       {
-        name: "Pixel Buds Pro 2",
-        description: "Wireless earbuds with active noise cancellation",
-        link: "https://store.google.com/product/pixel_buds_pro_2",
-      },
-      {
-        name: "Fitbit Inspire 2",
-        description: "Fitness tracker for health monitoring",
-        link: "https://www.fitbit.com/global/us/products/trackers/inspire2",
+        name: "Wireless Earbuds",
+        description: "Noise-isolated audio for focus sessions",
       },
     ],
   },
@@ -84,17 +73,17 @@ const sections: Array<{ title: string; items: Item[] }> = [
     items: [
       {
         name: "Docker",
-        description: "Containerization for consistent dev environments",
+        description: "Containerized dev environments",
         link: "https://www.docker.com/",
       },
       {
         name: "Postman",
-        description: "API development and testing",
+        description: "API testing & debugging",
         link: "https://www.postman.com/",
       },
       {
         name: "Chrome DevTools",
-        description: "Browser debugging and performance analysis",
+        description: "Frontend debugging & performance profiling",
         link: "https://developer.chrome.com/docs/devtools/",
       },
     ],
@@ -104,18 +93,12 @@ const sections: Array<{ title: string; items: Item[] }> = [
     items: [
       {
         name: "Raycast",
-        description: "Blazingly fast launcher and productivity tool",
+        description: "Launcher + workflow automation",
         link: "https://www.raycast.com/",
       },
       {
-        name: "Obsidian",
-        description: "Knowledge base and note-taking with markdown",
-        link: "https://obsidian.md/",
-      },
-      {
-        name: "Granola",
-        description: "AI-powered note-taking for meetings",
-        link: "https://www.granola.so/",
+        name: "Notion / Obsidian",
+        description: "Notes, planning, and learning management",
       },
     ],
   },
@@ -123,13 +106,9 @@ const sections: Array<{ title: string; items: Item[] }> = [
     title: "🪑 Desk Setup",
     items: [
       {
-        name: "Minimal Setup",
-        description: "Just the laptop - portable and distraction-free workflow",
-      },
-      {
-        name: "Portronics My Buddy K11",
-        description: "Desk pad for comfortable workspace",
-        link: "https://www.amazon.in/dp/B0CWS3V8QN",
+        name: "Minimal Desk",
+        description:
+          "Laptop-only setup — distraction-free and portable workflow",
       },
     ],
   },
@@ -158,7 +137,6 @@ const UsesPage: React.FC = () => {
       .from(usesRef.current?.querySelectorAll(".section")!, {
         y: -8,
         opacity: 0,
-        ease: "power2.out",
         stagger: 0.02,
         duration: 0.2,
       })
@@ -167,7 +145,6 @@ const UsesPage: React.FC = () => {
         {
           y: -8,
           opacity: 0,
-          ease: "power2.out",
           stagger: 0.02,
           duration: 0.2,
         },
@@ -184,8 +161,8 @@ const UsesPage: React.FC = () => {
             Uses
           </h1>
           <p ref={subHeadingRef} className="text-lg leading-relaxed opacity-90">
-            A living document of the tools, apps, and hardware I use daily to
-            build software and stay productive.
+            Tools, apps, and hardware I use daily while building projects,
+            learning AI/ML, and writing code.
           </p>
         </div>
 
@@ -197,17 +174,14 @@ const UsesPage: React.FC = () => {
               </h2>
               <div className="space-y-6">
                 {section.items.map((item, itemIdx) => (
-                  <div className="section-item">
-                    <div
-                      key={itemIdx}
-                      className="border-l-2 py-2 pl-4 transition-all duration-100 hover:border-l-4 border-blue-600 dark:border-blue-400"
-                    >
+                  <div key={itemIdx} className="section-item">
+                    <div className="border-l-2 py-2 pl-4 transition-all duration-100 hover:border-l-4 border-blue-600 dark:border-blue-400">
                       {item.link ? (
                         <a
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mb-1 relative font-semibold text-xl inline font-sans text-blue-600 no-underline transition-colors duration-200 before:absolute before:bottom-0 before:h-px before:w-0 before:bg-current before:transition-all before:content-[''] hover:text-blue-700 hover:no-underline hover:before:w-full focus:outline-none focus-visible:before:w-full dark:text-blue-400 dark:hover:text-blue-300"
+                          className="mb-1 relative text-xl font-semibold inline text-blue-600 no-underline transition-colors duration-200 before:absolute before:bottom-0 before:h-px before:w-0 before:bg-current before:transition-all before:content-[''] hover:before:w-full dark:text-blue-400"
                         >
                           {item.name}
                         </a>
@@ -225,8 +199,8 @@ const UsesPage: React.FC = () => {
           ))}
         </div>
 
-        <p className="text-center pt-8 border-t mt-8 text-sm opacity-20">
-          This page is updated periodically as my setup evolves.
+        <p className="text-center pt-8 border-t mt-8 text-sm opacity-30">
+          This page evolves as my workflow evolves.
         </p>
       </div>
     </>

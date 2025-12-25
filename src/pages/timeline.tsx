@@ -9,52 +9,88 @@ import { SEO } from "@components"
 
 gsap.registerPlugin(TextPlugin)
 
+/* =======================
+   TIMELINE DATA (HARSH)
+   ======================= */
+
 const commits = [
   {
-    hash: "8a3f91",
+    hash: "a1c9e2",
     type: "feat",
     scope: "career",
-    message: "deploying sales AI agents at Regie",
+    message: "building AI & ML projects with real-world focus",
     details: [
-      "+ Added NestJS",
-      "+ Added TypeScript Strict Mode",
-      "+ Optimized Salesforce API",
+      "+ Machine Learning & NLP",
+      "+ Model experimentation",
+      "+ Problem-solving mindset",
     ],
     date: "Current",
   },
   {
-    hash: "7c2b14",
+    hash: "b7d421",
     type: "ship",
-    scope: "oss",
-    message: "release Testcase Generator v1.0",
-    details: ["+ Python CLI", "+ Automated Inputs", "- Removed Manual Entry"],
+    scope: "project",
+    message: "fake job detection system using Python & ML",
+    details: [
+      "+ Data preprocessing",
+      "+ Classification models",
+      "+ Real vs fake job prediction",
+    ],
     date: "2024",
   },
   {
-    hash: "6d1a92",
-    type: "chore",
-    scope: "stack",
-    message: "migrate core dependency to Rust",
-    details: ["+ Memory Safety", "+ Blazingly Fast", "- Legacy Python Scripts"],
-    date: "Experiment",
+    hash: "c92f10",
+    type: "ship",
+    scope: "project",
+    message: "student performance prediction system",
+    details: [
+      "+ Regression models",
+      "+ Data-driven insights",
+      "+ Academic performance analysis",
+    ],
+    date: "2024",
   },
   {
-    hash: "5e4c83",
-    type: "fix",
-    scope: "web",
-    message: "patch critical boredom with Git-Stalk-CLI",
-    details: ["+ Node.js", "+ GitHub API", "+ Terminal UI"],
-    date: "Side Project",
+    hash: "d3a77b",
+    type: "learn",
+    scope: "core",
+    message: "strengthening foundations in Python, SQL, DSA & ML",
+    details: [
+      "+ Python programming",
+      "+ SQL & databases",
+      "+ Data structures & algorithms",
+    ],
+    date: "Learning Phase",
   },
   {
-    hash: "3a8e60",
+    hash: "e01b5a",
+    type: "explore",
+    scope: "interest",
+    message: "exploring quantum mechanics, mathematics & chess",
+    details: [
+      "+ Quantum mechanics basics",
+      "+ Mathematical thinking",
+      "+ Strategic problem solving (chess)",
+    ],
+    date: "Ongoing",
+  },
+  {
+    hash: "root00",
     type: "init",
     scope: "root",
-    message: "initial commit aashutoshrathi",
-    details: ["+ Location: India", "+ Role: Full Stack Engineer"],
+    message: "started journey into computer science & AI",
+    details: [
+      "+ MCA (AI/ML) student",
+      "+ Curious learner",
+      "+ Building step by step",
+    ],
     date: "Start",
   },
 ] as const
+
+/* =======================
+   PAGE
+   ======================= */
 
 const TimelinePage: React.FC = () => {
   const headerRef = useRef<HTMLHeadingElement | null>(null)
@@ -66,24 +102,23 @@ const TimelinePage: React.FC = () => {
     const tl = gsap.timeline()
 
     tl.to(headerRef.current, {
-      text: {
-        value: "$ git log --oneline --graph",
-      },
+      text: { value: "$ git log --oneline --graph" },
       duration: 1,
       ease: "none",
     })
       .fromTo(
         cursorRef.current,
         { autoAlpha: 0, x: -20 },
-        { autoAlpha: 1, duration: 1, repeat: -1, ease: SteppedEase.config(1) }
+        {
+          autoAlpha: 1,
+          duration: 1,
+          repeat: -1,
+          ease: SteppedEase.config(1),
+        }
       )
       .from(
         subHeaderRef.current,
-        {
-          y: -10,
-          opacity: 0,
-          ease: "power1.out",
-        },
+        { y: -10, opacity: 0, ease: "power1.out" },
         "<0.1"
       )
 
@@ -102,17 +137,17 @@ const TimelinePage: React.FC = () => {
     <>
       <SEO title="About" />
 
-      <div className="text-zinc-800 dark:text-zinc-100 min-h-[calc(100vh-216px)] p-4 font-mono sm:p-8">
+      <div className="min-h-[calc(100vh-216px)] p-4 font-mono text-zinc-800 dark:text-zinc-100 sm:p-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-8">
             <header>
               <h2
                 ref={headerRef}
-                className="text-lg h-7 inline-block font-bold  text-zinc-800 dark:text-zinc-100 mb-2"
+                className="mb-2 inline-block h-7 text-lg font-bold"
               />
               <span ref={cursorRef}>█</span>
-              <p ref={subHeaderRef} className="text-zinc-500 text-sm">
-                Timeline of milestones
+              <p ref={subHeaderRef} className="text-sm text-zinc-500">
+                Timeline of my journey
               </p>
             </header>
           </div>
@@ -128,6 +163,10 @@ const TimelinePage: React.FC = () => {
   )
 }
 
+/* =======================
+   COMMIT ITEM
+   ======================= */
+
 interface AnimatedDetailsProps {
   commit: (typeof commits)[number]
 }
@@ -135,19 +174,16 @@ interface AnimatedDetailsProps {
 const AnimatedDetails: React.FC<AnimatedDetailsProps> = ({ commit }) => {
   const detailsRef = useRef<HTMLDetailsElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const isAnimating = useRef<boolean>(false)
+  const isAnimating = useRef(false)
 
-  const handleToggle = (e: React.MouseEvent<HTMLElement, MouseEvent>): void => {
-    const details = detailsRef.current
-    const content = contentRef.current
-
-    if (!details || !content) return
-
+  const handleToggle = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
 
-    if (isAnimating.current) return
-    isAnimating.current = true
+    const details = detailsRef.current
+    const content = contentRef.current
+    if (!details || !content || isAnimating.current) return
 
+    isAnimating.current = true
     const isOpen = details.open
 
     if (!isOpen) {
@@ -157,13 +193,10 @@ const AnimatedDetails: React.FC<AnimatedDetailsProps> = ({ commit }) => {
         { height: 0, opacity: 0 },
         {
           height: "auto",
-
           opacity: 1,
           duration: 0.4,
           ease: "power2.out",
-          onComplete: () => {
-            isAnimating.current = false
-          },
+          onComplete: () => (isAnimating.current = false),
         }
       )
     } else {
@@ -180,70 +213,71 @@ const AnimatedDetails: React.FC<AnimatedDetailsProps> = ({ commit }) => {
     }
   }
 
+  const blueTypes = commit.type === "learn" || commit.type === "explore"
+
   return (
     <details ref={detailsRef}>
       <summary
         onClick={handleToggle}
         className={clsx(
-          "grid focus:outline-none focus-visible:ring-1 md:grid-cols-[80px,10px,1fr,100px] grid-cols-[80px,10px,1fr] rounded cursor-pointer items-center gap-x-2 py-1 px-2",
+          "grid cursor-pointer items-center gap-x-2 rounded px-2 py-1 focus:outline-none md:grid-cols-[80px,10px,1fr,100px] grid-cols-[80px,10px,1fr]",
           {
-            "focus-visible:ring-green-600 dark:focus-visible:ring-green-400":
-              commit.type === "feat",
-            "focus-visible:ring-yellow-600 dark:focus-visible:ring-yellow-400":
-              commit.type === "ship",
-            "focus-visible:ring-orange-600 dark:focus-visible:ring-orange-400":
-              commit.type === "chore",
-            "focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400":
-              commit.type === "fix",
-            "focus-visible:ring-purple-600 dark:focus-visible:ring-purple-400":
-              commit.type === "init",
+            "focus-visible:ring-green-500": commit.type === "feat",
+            "focus-visible:ring-yellow-500": commit.type === "ship",
+            "focus-visible:ring-orange-500": commit.type === "chore",
+            "focus-visible:ring-blue-500":
+              commit.type === "fix" || blueTypes,
+            "focus-visible:ring-purple-500": commit.type === "init",
           }
         )}
       >
-        <span className="text-zinc-500 w-14 shrink-0 text-xs sm:w-20 self-start md:self-auto md:mt-0 mt-1 sm:text-sm">
+        <span className="w-14 shrink-0 text-xs text-zinc-500 sm:w-20 sm:text-sm">
           {commit.hash}
         </span>
+
         <span
-          className={clsx("relative text-lg shrink-0 leading-none self-start", {
-            "text-green-600 dark:text-green-400": commit.type === "feat",
-            "text-yellow-600 dark:text-yellow-400": commit.type === "ship",
-            "text-orange-600 dark:text-orange-400": commit.type === "chore",
-            "text-blue-600 dark:text-blue-400": commit.type === "fix",
-            "text-purple-600 dark:text-purple-400": commit.type === "init",
+          className={clsx("text-lg", {
+            "text-green-500": commit.type === "feat",
+            "text-yellow-500": commit.type === "ship",
+            "text-orange-500": commit.type === "chore",
+            "text-blue-500": commit.type === "fix" || blueTypes,
+            "text-purple-500": commit.type === "init",
           })}
         >
           ∗
         </span>
-        <span className="flex items-start md:flex-row flex-col md:gap-2">
+
+        <span className="flex flex-col md:flex-row md:gap-2">
           <span
             className={clsx("shrink-0", {
-              "text-green-600 dark:text-green-400": commit.type === "feat",
-              "text-yellow-600 dark:text-yellow-400": commit.type === "ship",
-              "text-orange-600 dark:text-orange-400": commit.type === "chore",
-              "text-blue-600 dark:text-blue-400": commit.type === "fix",
-              "text-purple-600 dark:text-purple-400": commit.type === "init",
+              "text-green-500": commit.type === "feat",
+              "text-yellow-500": commit.type === "ship",
+              "text-orange-500": commit.type === "chore",
+              "text-blue-500": commit.type === "fix" || blueTypes,
+              "text-purple-500": commit.type === "init",
             })}
           >
             {commit.type} ({commit.scope}):
           </span>
           <span>{commit.message}</span>
         </span>
-        <span className="text-zinc-400 shrink-0 dark:text-zinc-600 text-xs col-start-3 md:mt-0 mt-1 md:col-start-4 md:text-right">
+
+        <span className="col-start-3 text-xs text-zinc-400 md:col-start-4 md:text-right">
           {commit.date}
         </span>
       </summary>
 
       <div
         ref={contentRef}
-        className="grid gap-2 pt-1 grid-cols-[80px,10px,1fr] md:grid-cols-[80px,10px,1fr,100px] overflow-hidden"
+        className="grid grid-cols-[80px,10px,1fr] gap-2 overflow-hidden pt-1 md:grid-cols-[80px,10px,1fr,100px]"
       >
-        <div className="col-start-3 relative">
+        <div className="col-start-3">
           {commit.details.map((detail) => (
             <p
               key={detail}
               className={clsx("text-sm", {
-                "text-green-600 dark:text-green-400": detail.startsWith("+"),
-                "text-red-600 dark:text-red-400": detail.startsWith("-"),
+                "text-green-500": detail.startsWith("+"),
+                "text-red-500": detail.startsWith("-"),
               })}
             >
               {detail}

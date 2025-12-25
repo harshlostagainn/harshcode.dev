@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react"
+import { FaInstagram } from "react-icons/fa"
 
 import { useGSAP } from "@gsap/react"
 import { useLocation } from "@reach/router"
@@ -51,30 +52,28 @@ const Footer: React.FC = () => {
         className="text-center flex items-center justify-center gap-2"
       >
         <SocialIcon
-          link="https://github.com/aashutoshrathi"
-          title="GitHub"
-          icon={FaGithub}
-        />
-        <SocialIcon
-          link="https://x.com/AashutoshRathi"
-          title="X"
-          icon={FaTwitter}
-        />
-        <SocialIcon
-          link="https://stackoverflow.com/users/7326407/aashutosh-rathi?tab=profile"
-          title="Stack Overflow"
-          icon={FaStackOverflow}
-        />
-        <SocialIcon
-          link="https://dev.to/aashutoshrathi"
-          title="Dev"
-          icon={FaDev}
-        />
-        <SocialIcon
-          link="https://linkedin.com/in/aashutoshrathi"
-          title="LinkedIn"
-          icon={FaLinkedin}
-        />
+  link="https://github.com/harshlostagainn"
+  title="GitHub"
+  icon={FaGithub}
+/>
+
+<SocialIcon
+  link="https://x.com/chessinorbit"
+  title="X"
+  icon={FaTwitter}
+/>
+
+<SocialIcon
+  link="https://www.instagram.com/chessinorbit"
+  title="Instagram"
+  icon={FaInstagram}
+/>
+
+<SocialIcon
+  link="https://www.linkedin.com/in/iamharshdubey"
+  title="LinkedIn"
+  icon={FaLinkedin}
+/>
       </div>
       <p
         ref={builtWithRef}

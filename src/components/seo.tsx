@@ -1,5 +1,4 @@
 import React from "react"
-
 import { graphql, useStaticQuery } from "gatsby"
 import Helmet from "react-helmet"
 
@@ -11,10 +10,7 @@ interface SiteQueryResult {
       author: string
       navigationString: string
       coverImage: string
-      social: Array<{
-        name: string
-        url: string
-      }>
+      siteUrl: string
     }
   }
 }
@@ -26,17 +22,17 @@ interface MetaTag {
 }
 
 export interface SEOProps {
+  title: string
   description?: string
   lang?: string
   meta?: MetaTag[]
-  title: string
 }
 
 const SEO: React.FC<SEOProps> = ({
+  title,
   description = "",
   lang = "en",
   meta = [],
-  title,
 }) => {
   const { site } = useStaticQuery<SiteQueryResult>(graphql`
     query {
@@ -47,70 +43,73 @@ const SEO: React.FC<SEOProps> = ({
           author
           navigationString
           coverImage
+          siteUrl
         }
       }
     }
   `)
 
   const metaDescription = description || site.siteMetadata.description
+  const siteUrl = site.siteMetadata.siteUrl || "https://harshcode.dev"
+  const ogImage = site.siteMetadata.coverImage
 
   const metaTags: MetaTag[] = [
+    // Basic SEO
     {
-      name: `description`,
+      name: "description",
       content: metaDescription,
     },
+
+    // Open Graph
     {
-      property: `og:title`,
+      property: "og:title",
       content: title,
     },
     {
-      property: `og:url`,
-      content: `https://aashutosh.dev`,
-    },
-    {
-      property: `og:description`,
+      property: "og:description",
       content: metaDescription,
     },
     {
-      property: `og:type`,
-      content: `website`,
+      property: "og:type",
+      content: "website",
     },
     {
-      property: `og:image`,
-      content: `${site.siteMetadata.coverImage}`,
+      property: "og:url",
+      content: siteUrl,
     },
     {
-      name: `twitter:card`,
-      content: `summary`,
+      property: "og:image",
+      content: ogImage,
+    },
+
+    // Twitter
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
     },
     {
-      property: `twitter:url`,
-      content: `https://aashutosh.dev`,
-    },
-    {
-      name: `twitter:creator`,
+      name: "twitter:creator",
       content: site.siteMetadata.author,
     },
     {
-      name: `twitter:title`,
+      name: "twitter:title",
       content: title,
     },
     {
-      name: `twitter:description`,
+      name: "twitter:description",
       content: metaDescription,
     },
     {
-      property: `twitter:image`,
-      content: `${site.siteMetadata.coverImage}`,
+      name: "twitter:image",
+      content: ogImage,
     },
+
     ...meta,
   ]
 
   return (
     <Helmet
-      htmlAttributes={{
-        lang,
-      }}
+      htmlAttributes={{ lang }}
       title={title}
       titleTemplate={`${site.siteMetadata.navigationString}%s`}
       meta={metaTags}

@@ -43,59 +43,42 @@ const PROJECT_URL = `${process.env.GATSBY_API_URI}projects`
 const DUMMY_PROJECTS: Project[] = [
   {
     id: 1,
-    name: "Awesome GitHub Profile",
+    name: "Fake Job Detection System",
     description:
-      "A curated list of awesome GitHub Profile READMEs with creative ideas and implementations",
-    language: "JavaScript",
-    html_url: "https://github.com/aashutoshrathi/awesome-github-profile",
-    homepage: "https://awesomegithubprofile.tech",
+      "An AI/ML-based system that detects fake job postings using NLP techniques and supervised learning models.",
+    language: "Python",
+    html_url: "https://github.com/harshlostagainn/fake-job-detector",
+    homepage: "",
   },
   {
     id: 2,
-    name: "Word Counter",
+    name: "Student Performance Prediction",
     description:
-      "A blazingly fast CLI tool to count words, characters, and lines in text files",
-    language: "Rust",
-    html_url: "https://github.com/aashutoshrathi/word-counter",
+      "Machine learning project to analyze and predict student academic performance using real-world datasets.",
+    language: "Python",
+    html_url: "https://github.com/harshlostagainn/student-performance-ai",
     homepage: "",
   },
   {
     id: 3,
-    name: "Pokemon Card Generator",
+    name: "Weather API Application",
     description:
-      "Generate custom Pokemon trading cards with your own stats and images",
-    language: "TypeScript",
-    html_url: "https://github.com/aashutoshrathi/pokemon-generator",
-    homepage: "https://pokemon.aashutosh.dev",
+      "A simple weather web application that fetches and displays real-time weather data using public APIs.",
+    language: "HTML",
+    html_url: "https://github.com/harshlostagainn/WeatherAPI",
+    homepage: "",
   },
   {
     id: 4,
-    name: "Git Stalk CLI",
+    name: "HarshLostAgain GitHub Profile",
     description:
-      "Stalk GitHub users via command line with beautiful charts and stats",
-    language: "Python",
-    html_url: "https://github.com/aashutoshrathi/git-stalk-cli",
-    homepage: "",
-  },
-  {
-    id: 5,
-    name: "Nibbles.dev",
-    description:
-      "Weekly tech newsletter covering latest in web development, AI, and developer tools",
-    language: "MDX",
-    html_url: "https://github.com/aashutoshrathi/nibbles",
-    homepage: "https://nibbles.dev",
-  },
-  {
-    id: 6,
-    name: "Testcase Generator",
-    description:
-      "Automatically generate test cases for competitive programming problems",
-    language: "Go",
-    html_url: "https://github.com/aashutoshrathi/testcase-generator",
+      "My personal GitHub profile repository highlighting interests in AI/ML, Quantum Computing, Chess, and Mathematics.",
+    language: "",
+    html_url: "https://github.com/harshlostagainn/harshlostagainn",
     homepage: "",
   },
 ]
+
 
 const Projects: React.FC = () => {
   const [projects, setProjects] = useState<Project[] | null>(null)

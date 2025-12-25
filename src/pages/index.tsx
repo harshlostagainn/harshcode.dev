@@ -23,12 +23,12 @@ const IndexPage: React.FC = () => {
     const tl = gsap.timeline()
 
     tl.from(imgWrapperRef.current, {
-      scale: 1.1,
+      scale: 1.12,
       x: isDesktop ? 24 : 0,
       y: isDesktop ? 0 : -24,
       opacity: 0,
       ease: "power2.out",
-      duration: 0.7,
+      duration: 0.8,
     }).from(
       headingRef.current,
       {
@@ -37,7 +37,7 @@ const IndexPage: React.FC = () => {
         ease: "power1.out",
         duration: 0.5,
       },
-      "<0.1"
+      "<0.15"
     )
 
     if (aboutRef.current) {
@@ -45,135 +45,80 @@ const IndexPage: React.FC = () => {
         y: 12,
         opacity: 0,
         ease: "power1.out",
-        stagger: 0.3,
+        stagger: 0.25,
       })
     }
 
-    // Juggle animation on hover
+    // Subtle juggle animation
     if (juggleRef.current) {
-      const juggleElement = juggleRef.current
-      const juggleTimeline = gsap.timeline({ paused: true, repeat: -1 })
+      const el = juggleRef.current
+      const tlJuggle = gsap.timeline({ paused: true, repeat: -1 })
 
-      juggleTimeline
-        .to(juggleElement, {
-          y: -8,
-          rotation: -5,
-          duration: 0.15,
-          ease: "power1.inOut",
-        })
-        .to(juggleElement, {
-          y: -12,
-          rotation: 0,
-          duration: 0.15,
-          ease: "power1.inOut",
-        })
-        .to(juggleElement, {
-          y: -8,
-          rotation: 5,
-          duration: 0.15,
-          ease: "power1.inOut",
-        })
-        .to(juggleElement, {
-          y: 0,
-          rotation: 0,
-          duration: 0.15,
-          ease: "power1.inOut",
-        })
+      tlJuggle
+        .to(el, { y: -6, rotation: -4, duration: 0.15 })
+        .to(el, { y: -10, rotation: 0, duration: 0.15 })
+        .to(el, { y: -6, rotation: 4, duration: 0.15 })
+        .to(el, { y: 0, rotation: 0, duration: 0.15 })
 
-      const handleMouseEnter = () => juggleTimeline.play()
-      const handleMouseLeave = () => {
-        juggleTimeline.pause()
-        gsap.to(juggleElement, {
-          y: 0,
-          rotation: 0,
-          duration: 0.2,
-          ease: "power1.out",
-        })
-      }
-
-      juggleElement.addEventListener("mouseenter", handleMouseEnter)
-      juggleElement.addEventListener("mouseleave", handleMouseLeave)
-
-      return () => {
-        juggleElement.removeEventListener("mouseenter", handleMouseEnter)
-        juggleElement.removeEventListener("mouseleave", handleMouseLeave)
-        juggleTimeline.kill()
-      }
+      el.addEventListener("mouseenter", () => tlJuggle.play())
+      el.addEventListener("mouseleave", () => {
+        tlJuggle.pause()
+        gsap.to(el, { y: 0, rotation: 0, duration: 0.2 })
+      })
     }
   }, [])
 
   return (
     <>
       <SEO title="Home" />
+
       <ReactTooltip
         id="em-dash-tooltip"
         place="top"
         className="!rounded-lg !bg-slate-800 !text-slate-50 dark:!bg-slate-200 dark:!text-slate-900"
       />
+
       <main className="flex min-h-[calc(100vh-258px)] flex-col-reverse items-center justify-center gap-12 px-4 md:min-h-[calc(100vh-216px)] md:flex-row">
+        {/* TEXT */}
         <div className="text-center md:w-2/3 md:text-left">
           <h1 ref={headingRef} className="mb-8 text-3xl font-bold">
-            Hey there, I'm Aashutosh! 👋
+            Hey there, I'm Harsh! 👋
           </h1>
+
           <section
             ref={aboutRef}
             className="mb-8 text-balance text-lg tracking-wide"
           >
-            <p className="mb-2">
-              Software Engineer by day, automation connoisseur always. Usually
-              found building tools for people who hate doing things manually
+            <p className="mb-3">
+              I’m an MCA (AI/ML) student who enjoys building intelligent systems
+              and solving real-world problems using data and code.
               <span
                 data-tooltip-id="em-dash-tooltip"
-                data-tooltip-content="not AI generated"
-                aria-label="not AI generated"
+                data-tooltip-content="written by me"
                 className="cursor-help"
               >
                 —
               </span>
-              because I'm definitely one of them.
             </p>
+
             <p className="mb-6">
-              <span>Currently </span>
-              <OutboundLink
-                href="https://regie.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative inline font-sans text-blue-600 no-underline transition-colors duration-200 before:absolute before:bottom-0 before:h-px before:w-0 before:bg-current before:transition-all before:content-[''] hover:text-blue-700 hover:no-underline hover:before:w-full focus:outline-none focus-visible:before:w-full dark:text-blue-400 dark:hover:text-blue-300"
-              >
-                optimizing sales with AI at Regie.ai
-              </OutboundLink>
-              <span>
-                , while trying to{" "}
-                <span ref={juggleRef} className="inline-block cursor-default">
-                  juggle
-                </span>{" "}
-                with my inbox zero goals, some tiny side projects and a bit of
-                writing on{" "}
-              </span>
-              <OutboundLink
-                href="https://nibbles.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative inline font-sans text-blue-600 no-underline transition-colors duration-200 before:absolute before:bottom-0 before:h-px before:w-0 before:bg-current before:transition-all before:content-[''] hover:text-blue-700 hover:no-underline hover:before:w-full focus:outline-none focus-visible:before:w-full dark:text-blue-400 dark:hover:text-blue-300"
-              >
-                nibbles.dev
-              </OutboundLink>
-              <span> and sometimes on </span>
-              <Link
-                to="/blog"
-                className="relative inline font-sans text-blue-600 no-underline transition-colors duration-200 before:absolute before:bottom-0 before:h-px before:w-0 before:bg-current before:transition-all before:content-[''] hover:text-blue-700 hover:no-underline hover:before:w-full focus:outline-none focus-visible:before:w-full dark:text-blue-400 dark:hover:text-blue-300"
-              >
-                this very blog
-              </Link>
-              <span>!</span>
+              I actively work on hands-on projects in machine learning, NLP, and
+              data-driven applications, focusing on clean implementation and
+              practical impact. I enjoy{" "}
+              <span ref={juggleRef} className="inline-block cursor-default">
+                experimenting
+              </span>{" "}
+              with models, learning how things work under the hood, and turning
+              ideas into usable solutions.
             </p>
+
             <div className="flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
               <OutboundLink
-                href="https://files.aashutosh.dev/resume.pdf#navpanes=0"
+                href="/Harsh_Dubey_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block rounded-lg bg-blue-600 px-4 py-2 text-base font-semibold text-white no-underline transition-colors duration-200 ease-in-out hover:bg-blue-700 hover:no-underline focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-700 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:bg-blue-400 dark:text-slate-900 dark:hover:bg-blue-300 dark:focus-visible:ring-blue-300 dark:focus-visible:ring-offset-slate-900"
                 onClick={mediumHaptic}
+                className="inline-block rounded-lg bg-blue-600 px-5 py-2.5 text-base font-semibold text-white transition-all duration-300 hover:scale-[1.04] hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
               >
                 View Résumé
               </OutboundLink>
@@ -181,17 +126,25 @@ const IndexPage: React.FC = () => {
           </section>
         </div>
 
-        <div ref={imgWrapperRef}>
-          <StaticImage
-            src="../images/square.png"
-            alt="Aashutosh Rathi"
-            placeholder="blurred"
-            layout="constrained"
-            width={200}
-            height={200}
-            className="rounded-lg"
-          />
-        </div>
+        {/* IMAGE */}
+        <div
+  ref={imgWrapperRef}
+  className="relative group"
+>
+  {/* glow */}
+  <div className="absolute inset-0 rounded-full bg-blue-500/25 blur-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+  <StaticImage
+    src="../images/square.png"
+    alt="Harsh Dubey"
+    placeholder="blurred"
+    layout="constrained"
+    width={220}
+    height={220}
+    className="relative rounded-full transition-transform duration-300 group-hover:scale-[1.05] drop-shadow-xl"
+  />
+</div>
+
       </main>
     </>
   )

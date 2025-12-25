@@ -11,38 +11,47 @@ const cspDirectives = [
   "img-src 'self' data: https:",
   "font-src 'self' data: fonts.googleapis.com fonts.gstatic.com",
   "worker-src 'self' blob: data:",
-  "connect-src 'self' 'unsafe-inline' api.aashutosh.dev github-contributions-api.jogruber.de www.google-analytics.com stats.g.doubleclick.net www.googletagmanager.com",
+  "connect-src 'self' 'unsafe-inline' github-contributions-api.jogruber.de www.google-analytics.com stats.g.doubleclick.net www.googletagmanager.com",
   "object-src 'none'",
 ]
 
 module.exports = {
   siteMetadata: {
-    title: `aashutosh.dev`,
-    description: `software engineer by profession, in it for the plot, baking code into stories. writing nibbles and open to quibbles on tech, life and everything in between.`,
-    navigationString: `aashutosh.dev | `,
-    author: `@AashutoshRathi`,
-    coverImage: `https://files.aashutosh.dev/pale_blue_dot.jpg`,
+    title: "Harsh Dubey",
+    description:
+      "AI/ML student focused on building practical, data-driven systems. Exploring NLP, machine learning, and real-world problem solving through hands-on projects.",
+    navigationString: "Harsh Dubey | ",
+    author: "@iamharshdubey",
+    siteUrl: "https://harshcode.dev",
+    coverImage: "https://harshcode.dev/square.png",
     social: [
       {
-        name: `X`,
-        url: `https://x.com/AashutoshRathi`,
+        name: "X",
+        url: "https://x.com/chessinorbit",
       },
       {
-        name: `GitHub`,
-        url: `https://github.com/aashutoshrathi`,
+        name: "GitHub",
+        url: "https://github.com/harshlostagainn",
+      },
+      {
+        name: "LinkedIn",
+        url: "https://linkedin.com/in/iamharshdubey",
       },
     ],
   },
+
   plugins: [
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+
     {
       resolve: `gatsby-plugin-layout`,
       options: {
         component: require.resolve(`./src/components/layout.tsx`),
       },
     },
+
     {
       resolve: "gatsby-plugin-alias-imports",
       options: {
@@ -52,6 +61,7 @@ module.exports = {
         },
       },
     },
+
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -59,13 +69,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `blog`,
-        path: `${__dirname}/content/blog`,
-      },
-    },
+
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
@@ -80,8 +84,10 @@ module.exports = {
         ],
       },
     },
+
     `gatsby-plugin-postcss`,
     `gatsby-plugin-react-helmet`,
+
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
@@ -96,25 +102,26 @@ module.exports = {
         },
       },
     },
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Aashutosh Rathi`,
-        short_name: `aashutosh.dev`,
-        start_url: `/`,
-        background_color: `#252525`,
-        theme_color: `#343b3f`,
-        display: `minimal-ui`,
-        icon: `src/images/square.png`,
+        name: "Harsh Dubey",
+        short_name: "harshcode.dev",
+        start_url: "/",
+        background_color: "#0f172a",
+        theme_color: "#2563eb",
+        display: "minimal-ui",
+        icon: "src/images/square.png",
       },
     },
+
     {
       resolve: "gatsby-plugin-netlify",
       options: {
         headers: {
           "/*": [
             `Content-Security-Policy: ${cspDirectives.join(";")}`,
-            "Feature-Policy: sync-xhr 'self'",
             "X-Frame-Options: DENY",
             "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload",
             "Upgrade-Insecure-Requests: 1",
